@@ -1,0 +1,21 @@
+version: '3'
+services:
+  cloud-test-server:
+    build: .
+    restart: unless-stopped
+    container_name: server
+    ports:
+      - 8090:8090
+    volumes:
+      - files:/var/lib/files/
+    networks:
+      - db_app-network
+
+#Docker Networks
+networks:
+  db_app-network:
+    external: true
+#Volumes
+volumes:
+  files:
+    driver: local
